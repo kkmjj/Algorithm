@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+
+	<context:annotation-config></context:annotation-config>
+	<!-- Exam exam = new NewlecExam(); -->
+	<!-- 생성할 객체 이름 클래스 이름 패키지 까지 꼭 써주기 -->
+	<bean id="exam1" class="spring.di.entity.NewlecExam">
+	
+	<!-- NewlecExam 에서 속성값 지정해주기  -->
+	<!-- <property name="kor" value="100"></property> -->
+	
+	<constructor-arg value="10"></constructor-arg>
+	<constructor-arg value="10"></constructor-arg>
+	<constructor-arg value="10"></constructor-arg>
+	<constructor-arg value="10"></constructor-arg> 
+	</bean>
+	
+	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="20"/>
+	
+	<!-- 	ExamConsole console = new GridExamConsole(); -->
+	<bean id="console" class="spring.di.ui.INlineNewlecExam">
+	<!-- setting 하는 법 console.setExam(exam); -->
+	<!--console이 갖는건데  referance exam를 넣는다. name은 setExam 인데 규칙상 set생략 앞에 대문자 소문자로 -->
+		<!--  <property name="exam" ref="exam"></property>-->
+	</bean>
+		
+		<!--  List<Exam> exams = new ArrayList<>(); -->
+		<bean id="exams" class="java.util.ArrayList">
+		
+			<constructor-arg>
+			<!-- exams.add(new NewlecExam(1,1,1,1)); -->
+				<list>
+					<bean class="spring.di.entity.NewlecExam" p:kor="1" p:eng="10">
+					
+					</bean>
+					<ref bean="exam1"/>
+				</list>
+			</constructor-arg>
+		
+		</bean>
+		
+		
+		
+</beans>
