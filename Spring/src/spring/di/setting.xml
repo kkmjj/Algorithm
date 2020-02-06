@@ -9,33 +9,38 @@
 
 
 	<context:annotation-config></context:annotation-config>
+	<!-- 객체 생성을 아예 안만들고 java안에서 만들경우 해당 JAVA에서 @Component추가하고  해당 경로 패키지 지정 -->
+	<context:component-scan base-package="spring.di.ui,spring.di.entity"></context:component-scan>
+	
+	
+	
 	<!-- Exam exam = new NewlecExam(); -->
 	<!-- 생성할 객체 이름 클래스 이름 패키지 까지 꼭 써주기 -->
-	<bean id="exam1" class="spring.di.entity.NewlecExam">
+	<!-- <bean id="exam1" class="spring.di.entity.NewlecExam">
 	
-	<!-- NewlecExam 에서 속성값 지정해주기  -->
-	<!-- <property name="kor" value="100"></property> -->
+	NewlecExam 에서 속성값 지정해주기 
+	<property name="kor" value="100"></property>
 	
 	<constructor-arg value="10"></constructor-arg>
 	<constructor-arg value="10"></constructor-arg>
 	<constructor-arg value="10"></constructor-arg>
 	<constructor-arg value="10"></constructor-arg> 
-	</bean>
-	
+	</bean> -->
+	<!-- 
 	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="20"/>
 	
-	<!-- 	ExamConsole console = new GridExamConsole(); -->
+		ExamConsole console = new GridExamConsole();
 	<bean id="console" class="spring.di.ui.INlineNewlecExam">
-	<!-- setting 하는 법 console.setExam(exam); -->
-	<!--console이 갖는건데  referance exam를 넣는다. name은 setExam 인데 규칙상 set생략 앞에 대문자 소문자로 -->
-		<!--  <property name="exam" ref="exam"></property>-->
+	setting 하는 법 console.setExam(exam);
+	console이 갖는건데  referance exam를 넣는다. name은 setExam 인데 규칙상 set생략 앞에 대문자 소문자로
+		 <property name="exam" ref="exam"></property>
 	</bean>
 		
-		<!--  List<Exam> exams = new ArrayList<>(); -->
+		 List<Exam> exams = new ArrayList<>();
 		<bean id="exams" class="java.util.ArrayList">
 		
 			<constructor-arg>
-			<!-- exams.add(new NewlecExam(1,1,1,1)); -->
+			exams.add(new NewlecExam(1,1,1,1));
 				<list>
 					<bean class="spring.di.entity.NewlecExam" p:kor="1" p:eng="10">
 					
@@ -45,7 +50,7 @@
 			</constructor-arg>
 		
 		</bean>
-		
+		 -->
 		
 		
 </beans>

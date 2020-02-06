@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import spring.di.entity.Exam;
@@ -29,8 +30,13 @@ public class Program {
 		// 위에 내용을 지시서에 작성 -> xml 파일 안에 다 만들어 놓는다. 
 		
 		
-		// 지시서  읽기 
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring/di/setting.xml");
+		/*  XML 지시서  읽기 
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("spring/di/setting.xml");*/
+		
+		ApplicationContext context =  new AnnotationConfigApplicationContext(NewlecDIConfig.class);
+		
+		
 		
 		// xml에서 id 값 가져와서 사용해보기
 		ExamConsole console =(ExamConsole) context.getBean("console") ;
