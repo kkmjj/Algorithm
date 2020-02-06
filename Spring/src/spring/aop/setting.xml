@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	
+
+	<!-- 생성할 객체 이름 클래스 이름 패키지 까지 꼭 써주기 -->
+	<bean id="target" class="spring.aop.entity.NewlecExam"
+	 p:kor="1" p:eng="1" p:com="1" p:math="1"></bean> 
+	 
+	<!-- handler 객체  -->
+	<!-- 지점을 정해서 위 아래로 구분해서 실행하는 LOgAroundAdvice -->
+	<bean id="logAroundAdvice" class="spring.aop.advice.logAroundAdvice"></bean>
+		<!--지점을 기준으로 그전에서만 수행해보는 LogbeforeAdvice-->
+	<bean id="logBeforeAdvice" class="spring.aop.advice.logBeforeAdvice"></bean>
+	
+	
+	
+	 <bean id="proxy" class=" org.springframework.aop.framework.ProxyFactoryBean">
+	 	<property name="target" ref="target"></property> 
+	 	<!-- (settarget(), target ref )넣기 -->
+	 	
+	 	<property name="interceptorNames">
+	 	<!-- 해들러를 넣어줄떄는 interceptorNames로 넣는다 -->
+	 		<list> <!-- names라는 이름에서 알수 있듯이 열러개가 올수 있으니 list로  값을 지정  -->
+	 			<value>logBeforeAdvice</value> <!-- 위에 객체를 결합 --> 
+	 			<value>logAroundAdvice</value>
+	 			<!--around, before 와 같은 aop 방식으로 만들어 놓은 것중 선택하여 넣어서 결합   -->
+	 		</list>
+	 	</property>
+	 </bean>
+	
+
+	
+	
+		
+</beans>
