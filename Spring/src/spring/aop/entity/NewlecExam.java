@@ -52,12 +52,19 @@ public class NewlecExam implements Exam {
 		this.com = com;
 	}
 	@Override
-	public int total() {
+	public int total()  {
 		// 개발자 관점의 AOP 에서 현재 걸리는 시간을 알아보고 싶을떄   앞 뒤에 뭔가를 작성 그것을 AOP 로 따로 구현 
 		
 	//	long start = System.currentTimeMillis();
 		// 개발자 관점에서 현재 사용되고 있는 코드에 뭔가를 확인하려고 코드를 작성할때 aop를 통해서 따로 관리 그것을 spring으로 하면 더 쉽게 해줌
 		int result =kor+eng+math+com;
+		
+		
+		if(kor > 100)
+		{
+			throw new IllegalArgumentException("유효하지 않는 국어 점수");
+		}
+		
 		
 		try {
 		Thread.sleep(200);
